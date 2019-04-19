@@ -5,6 +5,7 @@ using UnityEngine;
 public class PuzzleManager : MonoBehaviour {
     
     public PuzzleObject puzzleObject;
+    public Canvas menuCanvas;
     private bool isMouseDrag = false;
     private bool isSolved = false;
 
@@ -14,11 +15,11 @@ public class PuzzleManager : MonoBehaviour {
         {
             handleMouse();
             if (puzzleObject.isSolved())
+            {
                 isSolved = true;
-        }
-        else if (isSolved)
-        {
-            Debug.Log("Solved");
+                menuCanvas.enabled = true;
+            }
+
         }
     }
 
@@ -30,6 +31,12 @@ public class PuzzleManager : MonoBehaviour {
     private void handleMouse()
     {
         float drag;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Keydown escape");
+            menuCanvas.enabled = !menuCanvas.enabled;
+        }
         if (Input.GetMouseButtonDown(0))
             isMouseDrag = true;
         if (Input.GetMouseButtonUp(0))
@@ -38,7 +45,7 @@ public class PuzzleManager : MonoBehaviour {
         {
             drag = Input.GetAxis("Mouse X");
             if (drag > 0.05f || drag < -0.05f)
-                puzzleObject.rotate(drag);
+                puzzleObject.rotate(0, drag, 0);
         }
     }
 }

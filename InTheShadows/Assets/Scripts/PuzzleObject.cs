@@ -12,7 +12,7 @@ public class PuzzleObject : MonoBehaviour {
 
 	private void Start () {
         objTrans = GetComponent<Transform>();
-        objTrans.eulerAngles.Set(0, 0, 0);
+        objTrans.eulerAngles = new Vector3(0, 128, 0);
 	}
 
 	private void Update()
@@ -21,9 +21,11 @@ public class PuzzleObject : MonoBehaviour {
             rotateToSolved();
 	}
 
-	public void rotate(float rot)
+    public void rotate(float rotx, float roty, float rotz)
     {
-        objTrans.Rotate(objTrans.rotation.x, objTrans.rotation.y + (rot * speed), objTrans.rotation.z, Space.Self);
+        objTrans.eulerAngles = new Vector3(objTrans.eulerAngles.x + (rotx * speed),
+                                           objTrans.eulerAngles.y + (roty * speed),
+                                           objTrans.eulerAngles.z + (rotz * speed));
     }
 
     public bool isSolved()

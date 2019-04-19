@@ -447,14 +447,14 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 126985229}
-  m_LocalRotation: {x: 0, y: 0.99144495, z: -0, w: -0.13052607}
+  m_LocalRotation: {x: -0.0113761015, y: 0.98767215, z: -0.08641016, w: -0.13002938}
   m_LocalPosition: {x: 0, y: 0, z: -13.48}
   m_LocalScale: {x: 0.0015, y: 0.0008, z: 0}
   m_Children:
   - {fileID: 743226451}
   m_Father: {fileID: 0}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 195, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 194.99998, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 1.31, y: -0.95}
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 282840810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3eae38455b534fe3a2e692a9e998122, type: 3}
+  m_Script: {fileID: 11500000, guid: 82d35d739444d40e3b7f3d360e772ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &322733165
@@ -1549,7 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19852942, g: 0.19852942, b: 0.19852942, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1770,6 +1770,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cbcf501c889b147ac9ce07d555ddcff2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1333609456 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1581357128617056, guid: cbcf501c889b147ac9ce07d555ddcff2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1333609455}
+--- !u!114 &1333609457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1333609456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ca74492541444d7aa87e9dae40099c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1350957525
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,6 +2104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5bac4a9cf354a59a3591ac3e7ea134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleObject: {fileID: 0}
+  current: {fileID: 0}
 --- !u!4 &1602398699
 Transform:
   m_ObjectHideFlags: 0
@@ -2476,7 +2494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7352941, g: 0.7352941, b: 0.7352941, a: 1}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2485,7 +2503,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 300
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
