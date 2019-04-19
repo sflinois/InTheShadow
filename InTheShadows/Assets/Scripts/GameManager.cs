@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+
+    public GameObject puzzleObject;
+
 	// Use this for initialization
 	void Start () {
 		
