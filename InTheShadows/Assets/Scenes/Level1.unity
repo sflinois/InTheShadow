@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37312013, g: 0.3807403, b: 0.35872707, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -480,8 +480,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43b2d3bc986549caac9eaa234b9d85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleObject: {fileID: 672240961}
+  puzzleObjects:
+  - {fileID: 672240961}
   menuCanvas: {fileID: 852822317}
+  pDifficulty: 1
 --- !u!1 &208044249
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +608,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f162db5d840ee35459633a69d2031586, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f162db5d840ee35459633a69d2031586, type: 3}
       propertyPath: m_LocalPosition.z
@@ -991,7 +993,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 672240956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.307, y: 0.58, z: -7.215398}
+  m_LocalPosition: {x: 2.307, y: 0.78, z: -7.215398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 253854956}
