@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour {
 
-	private GameObject cam;
 	private Animator anim;
 	// Use this for initialization
 	void Start () {

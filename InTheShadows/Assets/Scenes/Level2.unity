@@ -483,7 +483,7 @@ MonoBehaviour:
   puzzleObjects:
   - {fileID: 672240961}
   menuCanvas: {fileID: 852822317}
-  pDifficulty: 1
+  pDifficulty: 2
 --- !u!1 &208044249
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,18 +559,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 208044252}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1638707182}
-        m_MethodName: loadLevel
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &208044252
@@ -1450,7 +1439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5bac4a9cf354a59a3591ac3e7ea134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleObject: {fileID: 672240956}
   current: {fileID: 0}
 --- !u!4 &1602398699
 Transform:

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     
-    public GameObject puzzleObject;
     public LevelSelector current = null;
+    public Material[] LevelMaterial;
 
 	// Use this for initialization
 	void Start () {
