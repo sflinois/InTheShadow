@@ -11,10 +11,17 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// PlayerPrefs.SetInt("tounlockeLevel", 1);
-		// PlayerPrefs.SetInt("unlockedLevel", 0);
 		Debug.Log(PlayerPrefs.GetInt("tounlockLevel"));
 		Debug.Log(PlayerPrefs.GetInt("unlockedLevel"));
+		if (PlayerPrefs.GetInt("tounlockLevel") == 0)
+			PlayerPrefs.SetInt("tounlockLevel", 1);
+		for(int i = 0; i < levels.Length; i++)
+		{
+			if (i < PlayerPrefs.GetInt("unlockedLevel"))
+				levels[i].simpleLockLevel(false);
+			else
+				levels[i].simpleLockLevel(true);
+		}
 	}
 	
 	// Update is called once per frame
@@ -67,13 +74,18 @@ public class GameManager : MonoBehaviour {
 	{
 		int to_unlock;
 
+		Debug.Log(PlayerPrefs.GetInt("isTest"));
 		if (PlayerPrefs.GetInt("tounlockLevel") != 0)
 		{
 			to_unlock = PlayerPrefs.GetInt("tounlockLevel");
-			for(int i = 0; i < levels.Length; i++)
+			PlayerPrefs.SetInt("unlockedLevel", to_unlock);
+			for(int i = 0; i < levels.Length; i++){
 				if (i < to_unlock && levels[i].is_lock)
 					levels[i].lockLevel(false);
-			PlayerPrefs.SetInt("unlockedLevel", to_unlock);
+				else if (i < to_unlock)
+					levels[i].simpleLockLevel(false);
+			}
+			// PlayerPrefs.SetInt("unlockedLevel", to_unlock);
 		}
 	}
 
@@ -101,4 +113,9 @@ public class GameManager : MonoBehaviour {
 	{
 		particleList.Add(go);
 	}
+
+	public void exitGame()
+    {
+        Application.Quit();
+    }
 }

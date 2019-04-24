@@ -12,19 +12,14 @@ public class LevelSelector : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// Debug.Log(PlayerPrefs.GetInt("unlockedLevel"));
 		// PlayerPrefs.SetInt("unlockedLevel", 0);
 		if (PlayerPrefs.GetInt("unlockedLevel") < level)
 		{
-			GetComponent<Renderer>().material.color = Color.grey;
-			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f,0.1f,0.1f));
-			is_lock = true;
+			simpleLockLevel(true);
 		}
 		else
 		{
-			GetComponent<Renderer>().material.color = Color.white;
-			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f,0.3f,0.5f));
-			is_lock = false;
+			simpleLockLevel(false);
 		}
 	}
 
@@ -35,19 +30,9 @@ public class LevelSelector : MonoBehaviour {
 
 	public void lockLevel(bool islock)
 	{
-		if (islock == true)
-		{
-			is_lock = true;
-			GetComponent<Renderer>().material.color = Color.grey;
-			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f,0.1f,0.1f));
-		}
-		else if (islock == false)
-		{
-			is_lock = false;
-			GetComponent<Renderer>().material.color = Color.white;
-			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f,0.3f,0.5f));
+		simpleLockLevel(islock);
+		if (islock == false)
 			gm.addParticle(Instantiate(unlock_particles, transform.position, Quaternion.identity));
-		}
 	}
 
 	public void simpleLockLevel(bool islock)
@@ -61,8 +46,16 @@ public class LevelSelector : MonoBehaviour {
 		else if (islock == false)
 		{
 			is_lock = false;
-			GetComponent<Renderer>().material.color = Color.white;
-			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f,0.3f,0.5f));
+			if (PlayerPrefs.GetInt("unlockedLevel") == level || PlayerPrefs.GetInt("isTest") == 1)
+			{
+				GetComponent<Renderer>().material.color = Color.white;
+				GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f,0.3f,0.5f));
+			}
+			else
+			{
+				GetComponent<Renderer>().material.color = new Color(0.95f, 1f, 0.95f);
+				GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f,0.4f,0.4f));
+			}
 		}
 	}
 }
