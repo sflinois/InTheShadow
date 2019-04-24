@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37312013, g: 0.3807403, b: 0.35872707, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -484,6 +484,7 @@ MonoBehaviour:
   - {fileID: 672240961}
   menuCanvas: {fileID: 852822317}
   pDifficulty: 1
+  pLevel: 1
 --- !u!1 &208044249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,8 +1451,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5bac4a9cf354a59a3591ac3e7ea134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleObject: {fileID: 672240956}
   current: {fileID: 0}
+  levels: []
+  particleList: []
 --- !u!4 &1602398699
 Transform:
   m_ObjectHideFlags: 0

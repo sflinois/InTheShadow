@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour {
 
+	public GameManager gm;
 	private Animator anim;
 	// Use this for initialization
 	void Start () {
@@ -18,5 +19,9 @@ public class CameraMove : MonoBehaviour {
 	public void setLevels(){
 		anim.SetBool("isMenu", false);
 		anim.SetBool("isLevel", true);
+	}
+
+	public void updateLevels(){
+		gm.updateLevels();
 	}
 }

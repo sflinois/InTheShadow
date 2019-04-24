@@ -5,19 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelector : MonoBehaviour {
 
-    public int level = 1;
-	public Renderer render;
+    public int level;
+	public bool is_lock;
+	public GameObject unlock_particles;
+	public GameManager gm;
+
 	// Use this for initialization
 	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		Color color = render.material.GetColor("_EmissionColor");
-		if (color.r < 0.5)
+		// Debug.Log(PlayerPrefs.GetInt("unlockedLevel"));
+		// PlayerPrefs.SetInt("unlockedLevel", 0);
+		if (PlayerPrefs.GetInt("unlockedLevel") < level)
 		{
-			Debug.Log("test");
-			render.material.SetColor("_EmissionColor", new EmissionColor(0.6F, 0.6F, 0.6F, 0.6F));
+			GetComponent<Renderer>().material.color = Color.grey;
+			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f,0.1f,0.1f));
+			is_lock = true;
+		}
+		else
+		{
+			GetComponent<Renderer>().material.color = Color.white;
+			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f,0.3f,0.5f));
+			is_lock = false;
 		}
 	}
 
@@ -26,11 +33,36 @@ public class LevelSelector : MonoBehaviour {
         SceneManager.LoadScene("Level" + level, LoadSceneMode.Single);
     }
 
-//	public void updateMaterial(Material mat1, Material mat2, Material mat3)
-//	{
-//		Renderer cur;
-//		cur = GetComponent<Renderer>();
-//		cur.material = mat2;
-//		cur.material.SetColor("_EmissionColor", 0);
-//	}
+	public void lockLevel(bool islock)
+	{
+		if (islock == true)
+		{
+			is_lock = true;
+			GetComponent<Renderer>().material.color = Color.grey;
+			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f,0.1f,0.1f));
+		}
+		else if (islock == false)
+		{
+			is_lock = false;
+			GetComponent<Renderer>().material.color = Color.white;
+			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f,0.3f,0.5f));
+			gm.addParticle(Instantiate(unlock_particles, transform.position, Quaternion.identity));
+		}
+	}
+
+	public void simpleLockLevel(bool islock)
+	{
+		if (islock == true)
+		{
+			is_lock = true;
+			GetComponent<Renderer>().material.color = Color.grey;
+			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f,0.1f,0.1f));
+		}
+		else if (islock == false)
+		{
+			is_lock = false;
+			GetComponent<Renderer>().material.color = Color.white;
+			GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.3f,0.3f,0.5f));
+		}
+	}
 }

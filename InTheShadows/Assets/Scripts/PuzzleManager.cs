@@ -6,7 +6,9 @@ public class PuzzleManager : MonoBehaviour {
     
     public PuzzleObject[] puzzleObjects;
     public Canvas menuCanvas;
+	public GameManager gm;
     public int pDifficulty;
+	public int pLevel;
     private int puzzleIndex = -1;
     private int selectMode = 0;
     private bool isSolved = false;
@@ -28,6 +30,11 @@ public class PuzzleManager : MonoBehaviour {
                         break;
                     }
                 }
+				if (isSolved && PlayerPrefs.GetInt("isTest") == 0)
+				{
+					if (PlayerPrefs.GetInt("tounlockLevel") < pLevel + 1)
+						PlayerPrefs.SetInt("tounlockLevel", pLevel + 1);
+				}
             }
             handleMouse();
         }
