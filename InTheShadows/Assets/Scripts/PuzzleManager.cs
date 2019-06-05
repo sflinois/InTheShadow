@@ -21,14 +21,18 @@ public class PuzzleManager : MonoBehaviour {
             {
                 isSolved = true;
                 menuCanvas.enabled = true;
-                for (int i = 0; i < puzzleObjects.Length; i++)
+
+                int solved = 0;
+                int i = 0;
+                for (i = 0; i < puzzleObjects.Length; i++)
                 {
-                    if (!puzzleObjects[i].isSolved())
-                    {
-                        isSolved = false;
-                        menuCanvas.enabled = false;
-                        break;
-                    }
+                    if (puzzleObjects[i].isSolved())
+                        solved += 1;
+                }
+                if (i != solved)
+                {
+                    isSolved = false;
+                    menuCanvas.enabled = false;
                 }
 				if (isSolved && PlayerPrefs.GetInt("isTest") == 0)
 				{
@@ -67,29 +71,30 @@ public class PuzzleManager : MonoBehaviour {
                 selectMode = 2;
             else if (pDifficulty >= 1)
                 selectMode = 1;
-        }
-
-        if (selectMode > 0)
-        {
-            PuzzleObject tmp;
-            int tmpIndex = 0;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
+            if (selectMode > 0)
             {
-                tmp = hit.transform.gameObject.GetComponent<PuzzleObject>(); 
-                if (tmp)
+                PuzzleObject tmp;
+                int tmpIndex = 0;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    for (int i = 0; i < puzzleObjects.Length; i++)
+                    tmp = hit.transform.gameObject.GetComponent<PuzzleObject>(); 
+                    if (tmp)
                     {
-                        if (puzzleObjects[i] == tmp)
-                            break;
-                        tmpIndex++;
+                        for (int i = 0; i < puzzleObjects.Length; i++)
+                        {
+                            if (puzzleObjects[i] == tmp)
+                                break;
+                            tmpIndex++;
+                        }
+                        puzzleIndex = tmpIndex < puzzleObjects.Length ? tmpIndex : -1;
                     }
-                    puzzleIndex = tmpIndex < puzzleObjects.Length ? tmpIndex : -1;
                 }
             }
         }
+
+
         if (Input.GetMouseButtonUp(0))
         {
             puzzleIndex = -1;
@@ -109,11 +114,11 @@ public class PuzzleManager : MonoBehaviour {
                 if (drag > 0.05f || drag < -0.05f)
                     puzzleObjects[puzzleIndex].rotate(0, 0, drag);
             }
-            else if (selectMode == 1)
+            else if (selectMode == 3)
             {
-//                drag = Input.GetAxis("Mouse X");
-//                if (drag > 0.05f || drag < -0.05f)
-//                    puzzleObjects[puzzleIndex].rotate(0, drag, 0);
+                drag = Input.GetAxis("Mouse Y");
+                if (drag > 0.05f || drag < -0.05f)
+                    puzzleObjects[puzzleIndex].transpose(drag);
             }
         }
     }

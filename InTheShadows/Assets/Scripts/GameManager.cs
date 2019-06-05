@@ -53,21 +53,29 @@ public class GameManager : MonoBehaviour {
 			PlayerPrefs.SetInt("unlockedLevel", 0);
 		}
 
-		List<GameObject> tmpParticleList = new List<GameObject>() ;
+		// List<GameObject> tmpParticleList = new List<GameObject>() ;
+		// foreach(GameObject particle in particleList)
+		// {
+		// 	Light tmpLight = particle.GetComponent<Transform>().GetChild(1).GetComponent<Light>();
+		// 	tmpLight.range -= 0.01f;
+		// 	if (tmpLight.range <= 0.1f)
+		// 	{
+		// 		Destroy(particle);
+		// 	}
+		// 	else
+		// 	{
+		// 		tmpParticleList.Add(particle);
+		// 	}
+		// }
+		// particleList = tmpParticleList;
+		if (particleList.Count != 0)
+			StartCoroutine(HandleLevelParticles());
+	}
+
+	IEnumerator HandleLevelParticles(){
+		yield return new WaitForSeconds(4);
 		foreach(GameObject particle in particleList)
-		{
-			Light tmpLight = particle.GetComponent<Transform>().GetChild(1).GetComponent<Light>();
-			tmpLight.range -= 0.01f;
-			if (tmpLight.range <= 0.1f)
-			{
-				Destroy(particle);
-			}
-			else
-			{
-				tmpParticleList.Add(particle);
-			}
-		}
-		particleList = tmpParticleList;
+			Destroy(particle);
 	}
 	
 	public void updateLevels()
