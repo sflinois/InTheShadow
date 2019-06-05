@@ -13,13 +13,21 @@ public class PuzzleObject : MonoBehaviour {
     private float YTolerance = 0.05f;
 
     private float solveSpeed = 0.1f;
+    private float solveYSpeed = 0.001f;
+
 
 	private void Start () {
         objTrans = GetComponent<Transform>();
         
-        objTrans.eulerAngles = new Vector3(0, Random.Range(50f, 280f), 0);
-        if (difficulty >= 2)
+        if (difficulty == 1)
+            objTrans.eulerAngles = new Vector3(0, Random.Range(50f, 280f), 0);
+        else if (difficulty == 2)
             objTrans.eulerAngles = new Vector3(0, Random.Range(50f, 280f), Random.Range(50f, 280f));
+        else if (difficulty >= 3)
+        {
+            objTrans.eulerAngles = new Vector3(0, Random.Range(50f, 280f), Random.Range(50f, 280f));
+            objTrans.position = new Vector3(objTrans.position.x, objTrans.position.y + Random.Range(-0.05f, 0.05f), objTrans.position.z);
+        }
 	}
 
 	private void Update()
@@ -73,6 +81,9 @@ public class PuzzleObject : MonoBehaviour {
         float eulerX = objTrans.eulerAngles.x;
         float eulerY = objTrans.eulerAngles.y;
         float eulerZ = objTrans.eulerAngles.z;
+        float posX = objTrans.position.x;
+        float posY = objTrans.position.y;
+        float posZ = objTrans.position.z;
 
         if ((objTrans.eulerAngles.x + angleTolerance) % 360 < angleTolerance - solveSpeed)
             eulerX += solveSpeed;
@@ -99,6 +110,12 @@ public class PuzzleObject : MonoBehaviour {
             eulerZ = 0;
         objTrans.eulerAngles = new Vector3(eulerX, eulerY, eulerZ);
 
-        
+        if (posY + solveYSpeed < TransYResolved)
+            posY += solveYSpeed;
+        else if (posY - solveYSpeed > TransYResolved)
+            posY -= solveYSpeed;
+        else
+            posY = TransYResolved;
+        objTrans.position = new Vector3(posX, posY, posZ);
     }
 }

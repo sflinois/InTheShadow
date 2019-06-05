@@ -37,6 +37,7 @@ public class LevelSelector : MonoBehaviour {
 
 	public void simpleLockLevel(bool islock)
 	{
+		GetComponent<Transform>().GetChild(0).gameObject.SetActive(false);
 		if (islock == true)
 		{
 			is_lock = true;
@@ -46,6 +47,7 @@ public class LevelSelector : MonoBehaviour {
 		else if (islock == false)
 		{
 			is_lock = false;
+			GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
 			if (PlayerPrefs.GetInt("unlockedLevel") == level || PlayerPrefs.GetInt("isTest") == 1)
 			{
 				GetComponent<Renderer>().material.color = Color.white;
