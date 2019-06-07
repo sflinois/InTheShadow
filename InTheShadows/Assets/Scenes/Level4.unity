@@ -1137,7 +1137,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: b4cb878aeb69d4db08e6dc454784c467, type: 3}
-    m_FontSize: 15
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1274,6 +1274,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3a876a6df6938479eb5275306ba170af, type: 2}
+    - target: {fileID: 114747615467740498, guid: 786f0f4b3917847d680265992c27f6de,
+        type: 2}
+      propertyPath: angleTolerance
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 786f0f4b3917847d680265992c27f6de, type: 2}
   m_IsPrefabParent: 0

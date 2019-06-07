@@ -10,7 +10,7 @@ public class PuzzleObject : MonoBehaviour {
     private bool solved = false;
     private float speed = 5f;
     private float speedCap = 0.2f;
-    private float angleTolerance = 5f;
+    public float angleTolerance = 5f;
     private float YTolerance = 0.05f;
     private float helpTolerance = 0.3f;
 
@@ -67,8 +67,6 @@ public class PuzzleObject : MonoBehaviour {
 
     public bool isSolved()
     {
-        //Debug.Log(objTrans.position.y);
-        //Debug.Log(TransYResolved);
         if ((objTrans.eulerAngles.x + angleTolerance) % 360 > 0
             && (objTrans.eulerAngles.x + angleTolerance) % 360 < (angleTolerance * 2)
             && (objTrans.eulerAngles.y + angleTolerance % 360) > 0

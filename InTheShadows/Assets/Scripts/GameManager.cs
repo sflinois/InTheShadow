@@ -13,29 +13,11 @@ public class GameManager : MonoBehaviour {
 	private void Awake()
 	{
         DontDestroyOnLoad(this.gameObject);
-        //UnityEngine.Object[] gmObjects = FindObjectsOfType(typeof(GameManager));
-        //List<GameObject> clones = new List<GameObject>();
-        //foreach (UnityEngine.Object o in gmObjects)
-        //{
-        //    if (o.GetInstanceID() != this.GetInstanceID())
-        //    {
-        //        GameObject instance = o as GameObject;
-        //        clones.Add(instance);
-        //    }
-        //}
-        //foreach (GameObject go in clones)
-        //{
-        //    Debug.Log("debug 1111111111111");
-        //    Destroy(go);
-        //}
+        PlayerPrefs.SetInt("isTest", 0);
 	}
 
 	// Use this for initialization
 	void Start () {
-
-
-		Debug.Log(PlayerPrefs.GetInt("tounlockLevel"));
-		Debug.Log(PlayerPrefs.GetInt("unlockedLevel"));
 		if (PlayerPrefs.GetInt("tounlockLevel") == 0)
 			PlayerPrefs.SetInt("tounlockLevel", 1);
 		for(int i = 0; i < levels.Length; i++)
@@ -112,7 +94,6 @@ public class GameManager : MonoBehaviour {
 	{
 		int to_unlock;
 
-		Debug.Log(PlayerPrefs.GetInt("isTest"));
 		if (PlayerPrefs.GetInt("tounlockLevel") != 0)
 		{
 			to_unlock = PlayerPrefs.GetInt("tounlockLevel");

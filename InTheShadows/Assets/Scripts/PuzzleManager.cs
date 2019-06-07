@@ -32,7 +32,6 @@ public class PuzzleManager : MonoBehaviour {
                 }
                 progress /= i;
                 menuProgressBar.localScale = new Vector3(progress, 1f, 1f);
-                Debug.Log("Progress : " + progress);
                 if (i == solved)
                 {
                     isSolved = true;
@@ -51,7 +50,6 @@ public class PuzzleManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("Start puzzleManager");
 	}
 
     private void handleMouse()
@@ -61,7 +59,6 @@ public class PuzzleManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Keydown escape");
             menuPanel.SetActive(!menuPanel.activeSelf);
         }
         if (menuPanel.activeSelf)
