@@ -5,7 +5,9 @@ using UnityEngine;
 public class PuzzleManager : MonoBehaviour {
     
     public PuzzleObject[] puzzleObjects;
-    public Canvas menuCanvas;
+    public GameObject menuPanel;
+    public GameObject menuButton;
+    public RectTransform menuProgressBar;
 	public GameManager gm;
     public int pDifficulty;
 	public int pLevel;
@@ -17,22 +19,25 @@ public class PuzzleManager : MonoBehaviour {
     {
         if (!isSolved)
         {
-            if (!menuCanvas.enabled)
+            if (!menuPanel.activeSelf)
             {
-                isSolved = true;
-                menuCanvas.enabled = true;
-
                 int solved = 0;
                 int i = 0;
+                float progress = 0f;
                 for (i = 0; i < puzzleObjects.Length; i++)
                 {
                     if (puzzleObjects[i].isSolved())
                         solved += 1;
+                    progress += puzzleObjects[i].getProgress(pDifficulty);
                 }
-                if (i != solved)
+                progress /= i;
+                menuProgressBar.localScale = new Vector3(progress, 1f, 1f);
+                Debug.Log("Progress : " + progress);
+                if (i == solved)
                 {
-                    isSolved = false;
-                    menuCanvas.enabled = false;
+                    isSolved = true;
+                    menuPanel.SetActive(true);
+                    menuButton.SetActive(true);
                 }
 				if (isSolved && PlayerPrefs.GetInt("isTest") == 0)
 				{
@@ -57,9 +62,9 @@ public class PuzzleManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Keydown escape");
-            menuCanvas.enabled = !menuCanvas.enabled;
+            menuPanel.SetActive(!menuPanel.activeSelf);
         }
-        if (menuCanvas.enabled)
+        if (menuPanel.activeSelf)
             return;
         
         // mode selection

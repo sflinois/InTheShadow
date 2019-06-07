@@ -9,8 +9,10 @@ public class PuzzleObject : MonoBehaviour {
     public float TransYResolved;
     private bool solved = false;
     private float speed = 5f;
+    private float speedCap = 0.2f;
     private float angleTolerance = 5f;
     private float YTolerance = 0.05f;
+    private float helpTolerance = 0.3f;
 
     private float solveSpeed = 0.1f;
     private float solveYSpeed = 0.001f;
@@ -26,7 +28,7 @@ public class PuzzleObject : MonoBehaviour {
         else if (difficulty >= 3)
         {
             objTrans.eulerAngles = new Vector3(0, Random.Range(50f, 280f), Random.Range(50f, 280f));
-            objTrans.position = new Vector3(objTrans.position.x, objTrans.position.y + Random.Range(-0.05f, 0.05f), objTrans.position.z);
+            objTrans.position = new Vector3(objTrans.position.x, objTrans.position.y + Random.Range(-1f, 1f), objTrans.position.z);
         }
 	}
 
@@ -40,6 +42,12 @@ public class PuzzleObject : MonoBehaviour {
     {
         if (solved)
             return;
+        if (rotx > speedCap || rotx < -speedCap)
+            rotx = rotx > 0 ? speedCap : -speedCap;
+        if (roty > speedCap || roty < -speedCap)
+            roty = roty > 0 ? speedCap : -speedCap;
+        if (rotz > speedCap || rotz < -speedCap)
+            rotz = rotz > 0 ? speedCap : -speedCap;
         objTrans.eulerAngles = new Vector3(objTrans.eulerAngles.x + (rotx * speed),
                                            objTrans.eulerAngles.y + (roty * speed),
                                            objTrans.eulerAngles.z + (rotz * speed));
@@ -47,6 +55,8 @@ public class PuzzleObject : MonoBehaviour {
 
     public void transpose(float transposey)
     {
+        if (transposey > speedCap + 0.2f || transposey < -speedCap - 0.2f)
+            transposey = transposey > 0 ? speedCap + 0.2f : -speedCap - 0.2f;
         if (solved)
             return;
         if (transposey > 0 && objTrans.position.y - TransYResolved < 1)
@@ -57,8 +67,8 @@ public class PuzzleObject : MonoBehaviour {
 
     public bool isSolved()
     {
-        Debug.Log(objTrans.position.y);
-        Debug.Log(TransYResolved);
+        //Debug.Log(objTrans.position.y);
+        //Debug.Log(TransYResolved);
         if ((objTrans.eulerAngles.x + angleTolerance) % 360 > 0
             && (objTrans.eulerAngles.x + angleTolerance) % 360 < (angleTolerance * 2)
             && (objTrans.eulerAngles.y + angleTolerance % 360) > 0
@@ -95,10 +105,7 @@ public class PuzzleObject : MonoBehaviour {
         if ((objTrans.eulerAngles.y + angleTolerance) % 360 < angleTolerance - solveSpeed)
             eulerY += solveSpeed;
         else if ((objTrans.eulerAngles.y + angleTolerance) % 360 > angleTolerance + solveSpeed)
-        {
             eulerY -= solveSpeed;
-            Debug.Log(eulerY);
-        }
         else
             eulerY = 0;
 
@@ -117,5 +124,33 @@ public class PuzzleObject : MonoBehaviour {
         else
             posY = TransYResolved;
         objTrans.position = new Vector3(posX, posY, posZ);
+    }
+
+    public float getProgress(int difficulty)
+    {
+        float progress = 0f;
+        float tmp;
+
+        if (difficulty >= 1 && (objTrans.eulerAngles.y + angleTolerance) % 360 < 360 * helpTolerance
+            || (objTrans.eulerAngles.y + angleTolerance) % 360 > 360 - (360 * helpTolerance))
+        {
+            tmp = objTrans.eulerAngles.y > 180 ? -1 * (objTrans.eulerAngles.y - 360) : objTrans.eulerAngles.y;
+            progress += (1 - (tmp / (360 * helpTolerance))) / difficulty;
+
+        }
+        if (difficulty >= 2 && (objTrans.eulerAngles.z + angleTolerance) % 360 < 360 * helpTolerance
+             || (objTrans.eulerAngles.z + angleTolerance) % 360 > 360 - (360 * helpTolerance))
+        {
+            tmp = objTrans.eulerAngles.z > 180 ? -1 * (objTrans.eulerAngles.z - 360) : objTrans.eulerAngles.z;
+            progress += (1 - (tmp / (360 * helpTolerance))) / difficulty;
+
+        }
+        if (difficulty >= 3 && objTrans.position.y - TransYResolved > -0.8f * helpTolerance
+            && objTrans.position.y - TransYResolved < 0.5f * helpTolerance)
+        {
+            tmp = objTrans.position.y - TransYResolved < 0 ? TransYResolved - objTrans.position.y : objTrans.position.y - TransYResolved;
+            progress += (1 - (tmp / (0.8f * helpTolerance))) / difficulty;
+        }
+        return progress;
     }
 }
