@@ -70,9 +70,9 @@ public class PuzzleManager : MonoBehaviour {
         // mode selection
         if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetKey(KeyCode.O) && pDifficulty >= 3)
+            if (Input.GetKey(KeyCode.LeftShift) && pDifficulty >= 3)
                 selectMode = 3;
-            else if (Input.GetKey(KeyCode.P) && pDifficulty >= 2)
+            else if (Input.GetKey(KeyCode.LeftControl) && pDifficulty >= 2)
                 selectMode = 2;
             else if (pDifficulty >= 1)
                 selectMode = 1;
