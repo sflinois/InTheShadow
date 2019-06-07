@@ -103,8 +103,9 @@ public class GameManager : MonoBehaviour {
 					levels[i].lockLevel(false);
 				else if (i < to_unlock)
 					levels[i].simpleLockLevel(false);
+                else if (PlayerPrefs.GetInt("isTest") == 0)
+                    levels[i].simpleLockLevel(true);
 			}
-			// PlayerPrefs.SetInt("unlockedLevel", to_unlock);
 		}
 	}
 
