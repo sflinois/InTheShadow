@@ -8,9 +8,32 @@ public class GameManager : MonoBehaviour {
     public LevelSelector current = null;
 	public LevelSelector[] levels;
 	public List<GameObject> particleList;
+    public Slider mainSlider;
+
+	private void Awake()
+	{
+        DontDestroyOnLoad(this.gameObject);
+        //UnityEngine.Object[] gmObjects = FindObjectsOfType(typeof(GameManager));
+        //List<GameObject> clones = new List<GameObject>();
+        //foreach (UnityEngine.Object o in gmObjects)
+        //{
+        //    if (o.GetInstanceID() != this.GetInstanceID())
+        //    {
+        //        GameObject instance = o as GameObject;
+        //        clones.Add(instance);
+        //    }
+        //}
+        //foreach (GameObject go in clones)
+        //{
+        //    Debug.Log("debug 1111111111111");
+        //    Destroy(go);
+        //}
+	}
 
 	// Use this for initialization
 	void Start () {
+
+
 		Debug.Log(PlayerPrefs.GetInt("tounlockLevel"));
 		Debug.Log(PlayerPrefs.GetInt("unlockedLevel"));
 		if (PlayerPrefs.GetInt("tounlockLevel") == 0)
@@ -22,8 +45,15 @@ public class GameManager : MonoBehaviour {
 			else
 				levels[i].simpleLockLevel(true);
 		}
+        if (mainSlider)
+            mainSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
 	}
 	
+    public void ValueChangeCheck()
+    {
+        gameObject.GetComponent<AudioSource>().volume = mainSlider.value;
+    }
+
 	// Update is called once per frame
 	void Update () {
         if (Input.GetMouseButtonDown(0))
@@ -116,6 +146,11 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
+
+    public void changeVolume(float volume)
+    {
+        
+    }
 
 	public void addParticle(GameObject go)
 	{

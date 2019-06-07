@@ -20,7 +20,7 @@ public class PuzzleObject : MonoBehaviour {
 
 	private void Start () {
         objTrans = GetComponent<Transform>();
-        
+
         if (difficulty == 1)
             objTrans.eulerAngles = new Vector3(0, Random.Range(50f, 280f), 0);
         else if (difficulty == 2)
