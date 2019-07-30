@@ -42,15 +42,15 @@ public class PuzzleObject : MonoBehaviour {
     {
         if (solved)
             return;
-        if (rotx > speedCap || rotx < -speedCap)
-            rotx = rotx > 0 ? speedCap : -speedCap;
-        if (roty > speedCap || roty < -speedCap)
-            roty = roty > 0 ? speedCap : -speedCap;
-        if (rotz > speedCap || rotz < -speedCap)
-            rotz = rotz > 0 ? speedCap : -speedCap;
-        objTrans.eulerAngles = new Vector3(objTrans.eulerAngles.x + (rotx * speed),
-                                           objTrans.eulerAngles.y + (roty * speed),
-                                           objTrans.eulerAngles.z + (rotz * speed));
+        if (rotx > speedCap * speed || rotx < -speedCap * speed)
+            rotx = rotx > 0 ? speedCap * speed : -speedCap * speed;
+        if (roty > speedCap * speed || roty < -speedCap * speed)
+            roty = roty > 0 ? speedCap * speed : -speedCap * speed;
+        if (rotz > speedCap * speed || rotz < -speedCap * speed)
+            rotz = rotz > 0 ? speedCap * speed : -speedCap * speed;
+        objTrans.eulerAngles = new Vector3(objTrans.eulerAngles.x + (rotx),
+                                           objTrans.eulerAngles.y + (roty),
+                                           objTrans.eulerAngles.z + (rotz));
     }
 
     public void transpose(float transposey)

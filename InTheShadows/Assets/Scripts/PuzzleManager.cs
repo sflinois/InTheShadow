@@ -14,6 +14,7 @@ public class PuzzleManager : MonoBehaviour {
     private int puzzleIndex = -1;
     private int selectMode = 0;
     private bool isSolved = false;
+    private float drag = 0;
 
     void Update()
     {
@@ -54,8 +55,6 @@ public class PuzzleManager : MonoBehaviour {
 
     private void handleMouse()
     {
-        float drag;
-
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -101,24 +100,25 @@ public class PuzzleManager : MonoBehaviour {
         {
             puzzleIndex = -1;
             selectMode = 0;
+            drag = 0;
         }
         if (puzzleIndex >= 0 && selectMode > 0)
         {
             if (selectMode == 1)
             {
-                drag = Input.GetAxis("Mouse X");
+                drag += Input.GetAxis("Mouse X") / 5;
                 if (drag > 0.05f || drag < -0.05f)
                     puzzleObjects[puzzleIndex].rotate(0, drag, 0);
             }
             else if (selectMode == 2)
             {
-                drag = Input.GetAxis("Mouse Y");
+                drag += Input.GetAxis("Mouse Y") / 5;
                 if (drag > 0.05f || drag < -0.05f)
                     puzzleObjects[puzzleIndex].rotate(0, 0, drag);
             }
             else if (selectMode == 3)
             {
-                drag = Input.GetAxis("Mouse Y");
+                drag += Input.GetAxis("Mouse Y") / 5;
                 if (drag > 0.05f || drag < -0.05f)
                     puzzleObjects[puzzleIndex].transpose(drag);
             }
